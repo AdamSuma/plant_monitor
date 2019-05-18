@@ -1,0 +1,20 @@
+{% extends 'account/base.html' %}
+{% block body %}
+<br>
+<br>
+<div style="height:400px;width:500px;margin-top: 50px;margin-left: 700px;background:rgba(255,255,255,0.8);border-radius: 1%;">
+	<img src="{{ plant.photo.url }}" style="width:200px;height:200px;margin-left: 150px;margin-top: 20px; border-radius: 100%">
+	<br>
+	{% if report_temp < 15 %}
+	<span class="glyphicon glyphicon-exclamation-sign" style="font-size:23px;color:red;text-align: center;margin-left: 290px;margin-top: -25px;"></span>
+	{% endif %}
+	<h1 style="text-align: center; color:black;margin-top: 10px;">{{plant.name}}</h1>&nbsp;<h4 style="margin-top:-23px;text-align: center; color:black">{{plant.type_plant}}</h4>
+	{% if report_temp < 15 %}
+	<h4 style="color:red;text-align: center">Critical Temperature: {{report_temp}}</h4>
+	{% endif %}
+	<br>
+	<a href="{% url 'account:plant_graphs' plant.id%}">
+	<button type="button" class="btn btn-outline-dark" style="margin-left:202.5px;font-size: 25px;">Graphs</button>
+	</a>
+</div>
+{% endblock %}

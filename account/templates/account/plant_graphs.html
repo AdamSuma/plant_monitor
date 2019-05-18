@@ -1,0 +1,88 @@
+{% extends 'account/base.html' %}
+{% block body %}
+
+
+<div style="width:65%;margin: auto;margin-top: 50px;background-color:white;border-radius: 1%">
+    <canvas id="line-chart" width="800" height="450"></canvas>
+</div>
+  <select id="chartType" name="chart-type" style="font-size: 20px;color:#01105A;margin-left:900px;margin-top:10px;">
+    <option value="">-------</option>
+    <option value="0">Last Week</option>
+    <option value="1">Last Year</option>
+  </select>
+<script>
+
+var determineChart = document.getElementById("chartType");
+var my_chart = new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+    datasets: [{ 
+        data: [86,114,106,106,107,111,133,221,783,2478],
+        label: "Africa",
+        borderColor: "#3e95cd",
+        fill: false
+
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'World population per region (in millions)'
+    }
+  }
+});
+chartType.addEventListener('change', function(){
+
+  if(chartType.options[chartType.selectedIndex].value == '0'){
+    delete my_chart;
+    var my_chart = new Chart(document.getElementById("line-chart"), {
+      type: 'line',
+      data: {
+        labels: ["Last Report","2nd Report","3rd Report","4th Report","5th Report","6th Report","7th Report"],
+        datasets: [{ 
+            data: {{last7_days_temp}},
+            label: "Africa",
+            borderColor: "green",
+            fill: false
+
+          }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'World population per region (in millions)'
+        }
+      }
+    });
+  }
+
+  else if(chartType.options[chartType.selectedIndex].value == '1'){
+    delete my_chart;
+    var my_chart = new Chart(document.getElementById("line-chart"), {
+      type: 'line',
+      data: {
+        labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+        datasets: [{ 
+            data: [86,114,106,106,107,111,133,221,783,2478],
+            label: "Africa",
+            borderColor: "#3e95cd",
+            fill: false
+
+          }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'World population per region (in millions)'
+        }
+      }
+    });
+  }
+})
+</script>
+
+{% endblock %}
